@@ -164,3 +164,81 @@ void myFunc3(params int[] val){
     }
 } 
 myFunc3(1,2,3,4);
+
+Console.WriteLine("");
+Console.WriteLine("----Enums----------------");
+// Enum
+void enum_test(){
+    test.Color myColor = test.Color.Blue;
+    Console.WriteLine(myColor);
+}
+enum_test();
+
+void enum_pos(){
+    var posTopLeft = test.Position.Top | test.Position.Left;
+    if((posTopLeft & test.Position.Top) > 0){
+        Console.WriteLine("Top position Detected");
+    }
+
+    posTopLeft = posTopLeft ^ test.Position.Top;
+    if((posTopLeft & test.Position.Top) == 0){
+        Console.WriteLine("Not in Top");
+    }
+}
+enum_pos();
+
+Console.WriteLine("");
+Console.WriteLine("----Tuple----------------");
+(int, int) count = (2, 3);
+Console.WriteLine($"Tuple values {count.Item1} & {count.Item2}");
+(int val1, int val2) count_2 = (2, 4);
+Console.WriteLine($"Tuple values {count_2.val1} & {count_2.val2}");
+(int, int) tupleTest(){
+    return (2, 3);
+}
+if(count == count_2){
+    Console.WriteLine("they are equal");
+}
+
+// Nullable
+Console.WriteLine("");
+Console.WriteLine("----Nullable----------------");
+int[]? possibleNull = null;
+if(possibleNull == null){
+    Console.WriteLine("val is null");
+}
+
+//struct
+var newStruct = new test.myStruct(5, "My age");
+var newStruct2 = default(test.myStruct);
+newStruct.print();
+newStruct2.print();
+
+namespace test{
+    public enum Color{
+        Yellow,
+        Blue,
+        Red,
+        Green
+    }
+
+    public enum Position{
+        Top = 1 << 0,
+        Left = 1 << 1,
+        Right = 1 << 2,
+        Bottom = 1 << 3
+    }
+    public struct myStruct{
+    int x = 0;
+    string y = "";
+   
+    public myStruct(int x, string y){
+        this.x = x;
+        this.y = y;
+    }
+    
+    public void print() => Console.WriteLine($"{this.y} is equal to {this.x}");
+}
+
+}
+
