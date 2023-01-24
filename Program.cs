@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Globalization;
+using Exp;
 
 //-----------------------------------------------------------------------
 // Strings are immutable so their value is not changed but replace
@@ -209,36 +210,71 @@ if(possibleNull == null){
 }
 
 //struct
+Console.WriteLine("");
+Console.WriteLine("----Struct----------------");
 var newStruct = new test.myStruct(5, "My age");
 var newStruct2 = default(test.myStruct);
 newStruct.print();
 newStruct2.print();
 
-namespace test{
-    public enum Color{
-        Yellow,
-        Blue,
-        Red,
-        Green
-    }
 
-    public enum Position{
-        Top = 1 << 0,
-        Left = 1 << 1,
-        Right = 1 << 2,
-        Bottom = 1 << 3
-    }
-    public struct myStruct{
-    int x = 0;
-    string y = "";
-   
-    public myStruct(int x, string y){
-        this.x = x;
-        this.y = y;
-    }
-    
-    public void print() => Console.WriteLine($"{this.y} is equal to {this.x}");
+int[] arrtest = {1, 2, 3, 4, 10};
+int max = arrtest.Max();
+Console.WriteLine("Max value: " + max);
+
+
+// test
+int[] first = {1, 2, 3 ,4};
+int[] second;
+int[][] nums = new int[1][];
+nums[0] = first;
+
+second = first;
+int index = Array.IndexOf(first, 2);
+first = first.Where((e, i)=> i != index).ToArray();
+Console.WriteLine("array: "+ first[1]);
+List<int> mylist = new List<int>(first);
+var thislist = Enumerable.Range(1, 5).ToList();
+int current = (4 % thislist.Count) + 3;
+Console.WriteLine("current value: " + current%thislist.Count); // 1
+
+
+//Class
+Console.WriteLine("");
+Console.WriteLine("----Class----------------");
+var person1 = new Human(22, "amr"){health = 100};
+Console.WriteLine(person1.print());
+person1.age = 5;
+Console.WriteLine(person1.print());
+
+var person2 = new Human();
+Console.WriteLine("Person2: " + person2.print());
+
+(string name_, int age_) = person1;
+Console.WriteLine($"My name is {name_} and age is {age_}");
+
+person1[0] = 51;
+Console.WriteLine(person1[0]);
+var slice = person1[0..5];
+slice[2] = 200;
+foreach(var i in slice[0..^0]){
+    Console.Write(i);
+}
+Console.WriteLine("");
+foreach(var i in person1[0..^0]){
+    Console.Write(i);
 }
 
+int[] doichange = {1, 2, 3 ,4 ,5};
+var sliceNew = doichange[0..^0];
+sliceNew[0] = 100;
+Console.WriteLine("");
+foreach(var i in doichange){
+    Console.Write(i + " ");
 }
+Console.WriteLine("");
+foreach(var i in sliceNew){
+    Console.Write(" " + i);
+}
+
 
