@@ -385,4 +385,46 @@ var newSomething = something with {Name="ahmed"};
 Console.WriteLine($"{newSomething.Name} : {newSomething.Age}");
 
 
+//---------------------------------------
+//----------Thread-----------------------------
+Console.WriteLine("");
+Console.WriteLine("Thread");
+var T1 = Task.Run(() => true);
+var T2 = Task.Run(() => Console.WriteLine("Task 2"));
+var awaiter = T1.GetAwaiter();
+awaiter.OnCompleted(()=> Console.WriteLine("Yes"));
+Task.WaitAny(T2);
+
+async Task DudeAsync()
+{
+    Console.WriteLine("Task Dude");
+} 
+
+await DudeAsync();
+var Results = Task.Run(() => {return 5;});
+Results.Wait();
+Console.WriteLine(Results.Result);
+
+async Task<int> ReturnTypeAsync()
+{
+    Thread.Sleep(1000);
+    Console.WriteLine("Task Dude");
+    return 100;
+} 
+
+int values = await ReturnTypeAsync();
+Console.WriteLine(values);
+
+Task[] tasks_ = new Task[10];
+
+for(int i = 0; i < tasks_.Length; ++i)
+{
+    int v = i;
+    tasks_[i] = Task.Run(()=> Console.WriteLine(v)); 
+}
+Task.WaitAll(tasks_);
+
+
+
+
 
