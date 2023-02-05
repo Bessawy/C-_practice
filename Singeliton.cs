@@ -1,6 +1,7 @@
 namespace Exp
 {
-    public class SingleTon{
+    public class SingleTon : test.FirstInterface, test.FirstInterface2
+    {
         private static SingleTon? _instance;
 
         SingleTon(){

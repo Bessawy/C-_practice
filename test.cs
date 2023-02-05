@@ -1,4 +1,20 @@
 namespace test{
+
+    public interface FirstInterface
+    {
+        void Readme()
+        {
+            Console.WriteLine("True");
+        }
+    }
+
+    public interface FirstInterface2
+    {
+        void Readme2()
+        {
+            Console.WriteLine("True");
+        }
+    }
     public enum Color{
         Yellow,
         Blue,

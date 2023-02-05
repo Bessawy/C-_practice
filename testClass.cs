@@ -4,6 +4,7 @@ namespace Exp
         int _age = 22;
         public const string discript = "hello";
         int[] arr = new int[10];
+        int[] arr2 = new int[10];
         public int health {get; init;}
         public int meter {get; private set;}
         public int age {
@@ -26,6 +27,23 @@ namespace Exp
         public int this[Index index]{
             get=> arr[index];
             set=> arr[index] = value;
+        }
+
+        public int this[int row, Index index]{
+            get{
+                if(row == 0){
+                    return arr[index];
+                }else{
+                    return arr2[index];
+                }
+                }
+            set{
+                if(row == 0){
+                    arr[index] = value;
+                }else{
+                    arr2[index] = value;
+                }
+            } 
         }
 
         public int[] this[Range range]{

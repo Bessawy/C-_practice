@@ -239,10 +239,11 @@ int current = (4 % thislist.Count) + 3;
 Console.WriteLine("current value: " + current%thislist.Count); // 1
 
 
-//Class
+//Classs
 Console.WriteLine("");
 Console.WriteLine("----Class----------------");
 var person1 = new Human(22, "amr"){health = 100};
+person1[0] = 2;
 Console.WriteLine(person1.print());
 person1.age = 5;
 Console.WriteLine(person1.print());
@@ -276,5 +277,112 @@ Console.WriteLine("");
 foreach(var i in sliceNew){
     Console.Write(" " + i);
 }
+
+person1[0, 0] = 5;
+person1[1, 0] = 10;
+Console.WriteLine("----------");
+Console.WriteLine(person1[1, 0]);
+
+Console.WriteLine("----------");
+Console.WriteLine("-----Polymorphism-----");
+Dog pet = new Dog("animal");
+Animal dog = new Dog("dog");
+Tiger tiger = new Tiger("tiger");
+
+
+tiger.status();
+if(tiger is Animal animal)
+{
+    animal.status();
+}
+else{
+    Console.WriteLine("here");
+}
+
+int stest = 5;
+stest.Add();
+
+var queue = new PriorityQueue<int, int>(Comparer<int>.Create((x, y) => y - x));
+
+queue.Enqueue(1,2);
+queue.Enqueue(12,3);
+
+int que;
+int p;
+queue.TryDequeue(out que, out p);
+Console.WriteLine(queue.TryDequeue(out que, out p));
+Console.WriteLine(queue.TryDequeue(out que, out p));
+
+int compareLargest(string str1, string str2)
+{
+    int comp1 = int.Parse(str1 + str2);
+    int comp2 = int.Parse(str2 + str1);
+
+    if( comp1 > comp2) return -1;
+    else if(comp2 > comp1) return 1;
+    else return 0;
+}
+
+var cmp = new Comparison<string>(compareLargest);
+
+
+int[] arr_int = {1, 21 ,3 ,4 ,5};
+string[] arr_str = arr_int.Select((i) => i.ToString()).ToArray();
+Array.Sort(arr_str, cmp);
+foreach(var i in arr_str)
+{
+    Console.Write(i + " ");
+}
+
+
+string testme = "1234";
+if(testme[0] == '1'){
+    Console.Write("0000000000000000");
+}
+Array.Sort(arr_int);
+foreach(var i in arr_int)
+{
+    Console.Write(i + " ");
+}
+
+int binarySearch(int[] a, int k) {
+        int lo = 0, hi = a.Length;
+        while (lo < hi) {
+            int mid = lo + (hi - lo) / 2;
+            if (a[mid] <= k) {
+                lo = mid + 1;
+            }else {
+                hi = mid;
+            }
+        }
+        return lo;
+    }
+
+
+
+int binarySearch2(int[] arr, int k)
+{
+    int l = 0, h = arr.Length;
+    while(l < h)
+    {
+        int mid = l + (h - l)/2;
+        if(arr[mid] <= k) l = mid + 1;
+        else h = mid;
+    }
+    return l;
+}
+
+Console.WriteLine("");
+Console.WriteLine(binarySearch(new int[]{1, 2, 3, 5, 6}, 6) - 1);
+
+
+//---------------------------------------
+Console.WriteLine("");
+Console.WriteLine("Anonymous types");
+var something = new{Name="amr", Age="12"};
+Console.WriteLine($"{something.Name} : {something.Age}");
+var newSomething = something with {Name="ahmed"};
+Console.WriteLine($"{newSomething.Name} : {newSomething.Age}");
+
 
 

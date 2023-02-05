@@ -8,6 +8,7 @@ public class OverRideMe{
         HashCode.Combine(2, 2, 3);
         return base.GetHashCode();
     }
+    
     public static bool operator == (OverRideMe r1, OverRideMe r2){
         return true;
     }
