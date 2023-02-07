@@ -408,7 +408,7 @@ Console.WriteLine(Results.Result);
 async Task<int> ReturnTypeAsync()
 {
     Thread.Sleep(1000);
-    Console.WriteLine("Task Dude");
+    Console.WriteLine("Task Dude 2");
     return 100;
 } 
 
@@ -424,7 +424,9 @@ for(int i = 0; i < tasks_.Length; ++i)
 }
 Task.WaitAll(tasks_);
 
+await ReturnTypeAsync();
 
-
-
+int[] nums_ = {1, 2, 3, 3};
+HashSet<int> newSet = new(nums_); 
+Console.WriteLine(newSet.Sum());
 
