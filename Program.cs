@@ -445,3 +445,63 @@ string newStr = "Duede";
 char newChar = '0';
 
 Char.ToLower('A');
+
+Mypredicate<int> funct = (val) => val > 1 ? true : false;  
+Debug.Assert(funct(5) == true);
+Debug.Assert(funct(0) == false);
+
+Myfunct<int, int> funct2 = (Val) => Val + 1;
+Debug.Assert(funct2(1) == 2);
+
+int LengthOF(string str1, string st2)
+{
+    Console.WriteLine("First");
+    return str1.Length + st2.Length;
+}
+int LengthOF2(string str1, string st2)
+{
+    Console.WriteLine("Second");
+    return str1.Length + st2.Length + 1;
+}
+Myfunct<string, string, int> funct3 = LengthOF;
+Myfunct<string, string, int> funct4 = LengthOF2;
+Myfunct<string, string, int> funct5 = funct4 + funct3;
+// Return from last one is returned (funct3)
+//Debug.Assert(funct3("amr", "amr") == 6);
+Console.WriteLine(funct5("amr","amr"));
+Console.WriteLine(new String('-', 40));
+
+Action<string> action1 = (string msg) => Console.WriteLine(msg);
+Action<string> action2 = (string msg) => Console.WriteLine(msg.ToUpper());
+Action<string> action3 = action1 + action2;
+
+action3("hello"); // this will call both action1 and action2
+
+int comapreWith(int val, int val2)
+{
+    if(val > val2)
+        return 1;
+    else if(val < val2)
+        return -1;
+    else
+        return 0;
+}
+
+// Sort Array
+int[] newArr = {1, 5, 2, 10, 2};
+Array.Sort(newArr, Comparer<int>.Create(comapreWith));
+Array.ForEach(newArr, Console.Write);
+Debug.Assert(Array.BinarySearch(newArr, 2) == 2);
+// Supposed Location
+Debug.Assert(Array.BinarySearch(newArr, 3) == -4);
+
+var obj = new {name = "amr", price = 100};
+string resp = JsonSerializer.Serialize(obj);
+Console.WriteLine(resp);
+
+
+IList<int> list = new List<int>{1, 2 ,3};
+IList<IList<int>> list2 = new List<IList<int>>();
+
+list2.Add(list);
+list2.Add(new List<int>{1, 2});
