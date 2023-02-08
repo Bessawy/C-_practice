@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Globalization;
+using System.Collections.Generic;
 using Exp;
 
 //-----------------------------------------------------------------------
@@ -417,12 +418,12 @@ Console.WriteLine(values);
 
 Task[] tasks_ = new Task[10];
 
-for(int i = 0; i < tasks_.Length; ++i)
-{
-    int v = i;
-    tasks_[i] = Task.Run(()=> Console.WriteLine(v)); 
-}
-Task.WaitAll(tasks_);
+//for(int i = 0; i < tasks_.Length; ++i)
+//{
+//   int v = i;
+//    tasks_[i] = Task.Run(()=> Console.WriteLine(v)); 
+//}
+//Task.WaitAll(tasks_);
 
 await ReturnTypeAsync();
 
@@ -430,3 +431,17 @@ int[] nums_ = {1, 2, 3, 3};
 HashSet<int> newSet = new(nums_); 
 Console.WriteLine(newSet.Sum());
 
+var Enumerat = nums_.GetEnumerator();
+Console.WriteLine(Enumerat.GetType());
+while(Enumerat.MoveNext())
+{
+    Console.Write(Enumerat.Current);
+}
+
+List<int> newList = new(){1, 2, 3};
+newList.Count();
+
+string newStr = "Duede";
+char newChar = '0';
+
+Char.ToLower('A');
