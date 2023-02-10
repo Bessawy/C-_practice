@@ -506,3 +506,113 @@ IList<IList<int>> list2 = new List<IList<int>>();
 
 list2.Add(list);
 list2.Add(new List<int>{1, 2});
+
+var stack = new Stack<int>(new int[]{1, 2 ,3 ,4});
+stack.Push(100);
+
+int result = 0;
+bool check = stack.TryPop(out result);
+
+Debug.Assert(check == true);
+Debug.Assert(result == 100);
+
+var queue3 = new Queue<int>(new int[] {1, 2, 3, 4});
+queue3.Enqueue(5);
+queue3.TryDequeue(out result);
+Debug.Assert(result == 1);
+
+int compareTo(int a, int b)
+{
+    return b > a ? 1 : (a < b ?  -1 : 0);
+}
+
+var tupleList = new (String name, int value)[]{("amr", 1), ("emad", 2), ("alaa", 3)};
+var queue2 = new PriorityQueue<string, int>(tupleList,
+        Comparer<int>.Create((int a, int b)=> b > a ? 1 : (a > b ?  -1 : 0)));
+
+queue2.Enqueue("messi", 4);
+Debug.Assert(queue2.Dequeue() == "messi");
+
+var set = new HashSet<int>();
+set.Add(4);
+set.Add(4);
+set.ToList().ForEach(Console.Write);
+
+var set2 = new SortedSet<int>();
+set2.Add(2);
+
+var obj11 = new {Name = "amr"};
+List<int> list1 = new List<int>(){4, 2, 1, 10, 2, 5};
+
+Console.WriteLine("");
+var objs = new[]{
+    new {Name = "amr" , score = 100},
+    new {Name = "emad", score = 400},
+    new {Name = "alaa", score = 200}
+};
+
+objs.Where((obj) => obj.score > 150)
+    .Select(obj => $"Name: {obj.Name} and Score: {obj.score}")
+    .ToList()
+    .ForEach(Console.WriteLine);
+
+list1.Take(2).ToList().ForEach(Console.Write);
+Console.WriteLine("");
+list1.Take(2..4).ToList().ForEach(Console.Write);
+Console.WriteLine("-----");
+
+var objs2 = new[]{
+    new {Name = "amr" , score = new int[]{1, 2, 3, 5}},
+    new {Name = "emad", score = new int[]{6, 7, 8, 9}},
+    new {Name = "alaa", score = new int[]{10, 11, 12, 13}}
+};
+
+var objs21 = new[]{
+    new {Name = "amr" , grade = 200},
+    new {Name = "emad", grade = 300},
+    new {Name = "alaa", grade = 400}
+};
+
+objs2.SelectMany((obj)=> obj.score[2..]).ToList().ForEach(Console.WriteLine);
+objs2.SelectMany((obj)=> obj.score, (obj, score) => $"name: {obj.Name} with score {score}")
+    .ToList()
+    .ForEach(Console.WriteLine);
+
+objs2.Join(objs21, obj1 => obj1.Name, obj2 => obj2.Name, 
+    (obj1, obj2) => $"{obj1.Name} + {obj1.score.Sum()} + {obj2.grade}")
+    .ToList().ForEach(Console.WriteLine);
+
+list1.OrderBy(a => a).ToList().ForEach(Console.Write);
+list1.OrderByDescending(a => a).ToList().ForEach(Console.Write);
+Console.WriteLine(" ");
+
+var cities = new[]
+{
+    new { Country = "Finland", City = "Helsinki" },
+    new { Country = "Finland", City = "Espoo" },
+    new { Country = "USA", City = "New York" },
+    new { Country = "Vietnam", City = "Hanoi" },
+    new { Country = "USA", City = "Florida" },
+    new { Country = "Finland", City = "Vantaa" },
+    new { Country = "USA", City = "Chicago" },
+    new { Country = "Vietnam", City = "Hoian" },
+};
+
+
+cities.GroupBy(city => city.Country, city => city.City, (country, city) => $"{country} has {city.Count()} cities")
+    .ToList().ForEach(Console.WriteLine);
+
+
+
+check = true ^ true;
+Console.WriteLine(3 ^ 5 ^ 5);
+
+int missingNumber(int[] nums) {
+
+    int xor = 0, i = 0;
+	for (i = 0; i < nums.Length; i++) {
+		xor = xor ^ i ^ nums[i];
+	}
+
+	return xor ^ i;
+}
